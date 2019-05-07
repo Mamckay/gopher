@@ -1,0 +1,35 @@
+
+The golang goRegLog.appcore component-group is responsible for
+providing app level components for the dataStore and the dataBase.
+
+This component group includes the following package:
+    1. dataBase   callers use db.
+    2. dataStore  callers use ds.
+    3. --- there may be some utility components in this group ---
+
+The db dataBase package uses the go-gp plugin to connect to Postgres databases.
+
+The ds dataStore package is potentially a very large package that is 
+responsible for manageing the directory hierarchy that contains the
+disk files which contain the video content and video metadata.
+
+The dataStore directory hierarchy is located outside of and at the
+same level as the application directory. For example:
+If the frontend is located inside
+    ../Demo5/ng
+    ../Demo5/go
+    ../Demo5/ds
+
+The ds dataStore directory hierarchy contans major areas:
+    1. Capture
+    2. Archive
+    3. Products
+
+The Capture area is a hierarchy of directories organized first by date,
+then by SensorID, and finally by chunk id. Directory names are generated
+by time or by random number generators.
+
+The Archive area is a hierarchy of directories organized by SensorID.
+
+The Products area is a hierarchy of directories organized by UserName of the
+product creator, or the person responsible for creating the products.

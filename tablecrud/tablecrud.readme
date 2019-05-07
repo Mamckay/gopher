@@ -1,0 +1,92 @@
+
+This is the table crud component group
+
+
+
+// func (gi *Sensor) TestsManyToMany(db *pg.DB, userid int) ([]Sensor, error) {
+// 	type Blog struct {
+// 		TableName struct{} `protobuf:"bytes,1,opt,name=tableName" json:"tableName,omitempty"`
+// 		Id        int64    `protobuf:"varint,2,opt,name=blogId,proto3" json:"blogId,omitempty" sql:",pk"`
+// 		Url       string   `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty" sql:"url"`
+// 		Places    []*Place `protobuf:"bytes,5,rep,name=places" json:"places,omitempty" pg:",many2many:blogs_to_places,joinFK:place_id, joinFK:blog_id"`
+// 	}
+
+// 	type Place struct {
+// 		TableName struct{} `protobuf:"bytes,1,opt,name=tableName" json:"tableName,omitempty"`
+// 		Id        int64    `protobuf:"varint,2,opt,name=placeId,proto3" json:"placeId,omitempty" sql:",pk"`
+// 		Name      string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty" sql:"name"`
+// 	}
+
+// 	type BlogsToPlaces struct {
+// 		BlogId  int
+// 		PlaceId int
+// 	}
+
+// 	mydb := db.Connect()
+// 	defer mydb.Close()
+
+// 	if err := createManyToManyTables(mydb); err != nil {
+// 		panic(err)
+// 	}
+
+// 	values := []interface{}{
+// 		&Blog{Id: 1, Url: "test1"},
+// 		&Blog{Id: 2, Url: "test2"},
+// 		&Place{Id: 1, Name: "test place"},
+// 		&BlogsToPlaces{BlogId: 1, PlaceId: 1},
+// 		&BlogsToPlaces{BlogId: 1, PlaceId: 1},
+// 	}
+// 	for _, v := range values {
+// 		err := db.Insert(v)
+// 		if err != nil {
+// 			panic(err)
+// 		}
+// 	}
+
+// 	blog := new(Blog)
+// 	err := mydb.Model(blog).
+// 		Relation("Places", func(q *orm.Query) (*orm.Query, error) {
+// 			// q = q.FormatQuery(nil, "TEST TEST TEST". params)
+// 			return q, nil
+// 		}).
+// 		First()
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	fmt.Println("Blog", blog.Id, "Places", blog.Places[0].Id)
+
+// }
+
+// func createManyToManyTables(db *pg.DB) error {
+// 	models := []interface{}{
+// 		(*Blog)(nil),
+// 		(*Place)(nil),
+// 		(*BlogsToPlaces)(nil),
+// 	}
+// 	for _, model := range models {
+// 		err := db.CreateTable(model, &orm.CreateTableOptions{
+// 			Temp: true,
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 	}
+// 	return nil
+// }
+
+// func Connect(serviceName string) *pg.DB {
+// 	db := pg.Connect(&pg.Options{
+// 		Addr: "0:5432",
+// 		User: "",
+// 		Password: "",
+// 		Database: "",
+// 	})
+// 	db.OnQueryProcessed(func(event *pg.QueryProcessedEvent) {
+// 		query, err := event.FormattedQuery()
+// 		if err != nil {
+// 			panic(err)
+// 		}
+// 		fmt.Println(query)
+// 	})
+// 	return db
+// }
